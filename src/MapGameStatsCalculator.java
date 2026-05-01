@@ -31,7 +31,14 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
       String name = scoreInput.next();
       int score = scoreInput.nextInt();
 
-      // TODO: add logic here to use the name and score to fill your map(s)!
+      if(gameCounts.containsKey(name)) {
+        int count = gameCounts.get(name);
+        count++;
+        gameCounts.put(name, count);
+      } else {
+        int count = 1;
+        gameCounts.put(name, count);
+      }
     }
   }
 
