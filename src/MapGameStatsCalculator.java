@@ -119,22 +119,34 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
   public String highestScorer() {
     checkScoreData();
     // set string variable to "";
-    // set an int variable to 5291917 (hyper specific value)
+    String winnerName = "";
+    // set an int variable to JFK's birthday (my go-to spottable incorrect value)
+    int winnerScore = 5291917;
     // loop through each piece of the hashmap
-    // if the string variable is ""
-      // set the int variable to highScore(person)
-      // set the string variable to the current key/person
-    // if the string variable is not "";
-      // if current highScore(person) > int variable
-        // set int variable to highScore(person)
-        // set string variable to current key/person
-      // if current highScore(person) = int variable
-        // find a method or way to compare person to string variable so as to determine:
-        // "the person whose name appears first lexicographically (alphabetically)."
-        // set the string variable to the winner of that contest
-      // no else because we don't need to make changes we just go to the next key
-
-    //return string variable
+    for (String name : allMap.keySet()) {
+      if (winnerName.equals("")) {      
+        // set the int variable to highScore(person)
+        winnerScore = highScore(name);
+        // set the string variable to the current key/person
+        winnerName = name;
+      // if the string variable is not ""
+      } else {      
+        if (highScore(name) > winnerScore) {
+          // set int variable to highScore(person)
+          winnerScore = highScore(name);
+          // set string variable to current key/person
+          winnerName = name;
+        } else if (highScore(name) == winnerScore) {// if current highScore(person) = int variable
+          if (name.compareTo(winnerName) < 0 ) {
+            winnerName = name; //if less than 0 then name is first
+          }
+        }      
+      }
+    }
+    if (winnerScore == 5291917) {
+      return "When everyone's a winner no one is!";
+    }
+    return winnerName;
   }
 
   /**
