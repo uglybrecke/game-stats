@@ -102,7 +102,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
     checkPerson(person);
     ArrayList<Integer> list = allMap.get(person);
     Collections.sort(list); //sort ascending
-    int returnInt = list.get(list.size() - 1); //grab the last value
+    int returnInt = list.get(list.size() - 1); //grab the last value (highest)
     return returnInt;
   }
 
@@ -117,11 +117,24 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public String highestScorer() {
-    // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'highestScorer'");
+    checkScoreData();
+    // set string variable to "";
+    // set an int variable to 5291917 (hyper specific value)
+    // loop through each piece of the hashmap
+    // if the string variable is ""
+      // set the int variable to highScore(person)
+      // set the string variable to the current key/person
+    // if the string variable is not "";
+      // if current highScore(person) > int variable
+        // set int variable to highScore(person)
+        // set string variable to current key/person
+      // if current highScore(person) = int variable
+        // find a method or way to compare person to string variable so as to determine:
+        // "the person whose name appears first lexicographically (alphabetically)."
+        // set the string variable to the winner of that contest
+      // no else because we don't need to make changes we just go to the next key
 
-    // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkScoreData();
+    //return string variable
   }
 
   /**
