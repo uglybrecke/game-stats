@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class MapGameStatsCalculator implements GameStatsCalculator {
 
@@ -18,27 +19,54 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    *  "Xinting": 1
    * }
    */
-  private Map<String, Integer> gameCounts;
+  // private Map<String, Integer> gameCounts;
+  // private Map<String, Integer> highScores;
+  private Map<String, ArrayList<Integer>> allMap;
 
   // For some waves you will need to add more private instance variables here!
 
 
 
   public MapGameStatsCalculator(Scanner scoreInput) {
-    gameCounts = new HashMap<>();
+    // gameCounts = new HashMap<>();
+    // highScores = new HashMap<>();
+    allMap = new HashMap<>();
 
     while(scoreInput.hasNext()) {
       String name = scoreInput.next();
       int score = scoreInput.nextInt();
 
-      if(gameCounts.containsKey(name)) {
-        int count = gameCounts.get(name);
-        count++;
-        gameCounts.put(name, count);
+      //logic for filling allMap
+      //was struggling to figure out how to get Avgs when i was looking ahead 
+      //so i paused and starting breaking down how to structure the class
+      //realized that if i made a hashmap with a string and an arraylist then i could use for EVERYTHING
+      //added a jpeg of my whiteboard process
+      if(allMap.containsKey(name)) {
+        ArrayList<Integer> list = allMap.get(name);
+        list.add(score);
       } else {
-        int count = 1;
-        gameCounts.put(name, count);
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(score);
+        allMap.put(name, list);
       }
+
+      // //logic for filling gamecounts
+      // if(gameCounts.containsKey(name)) {
+      //   int count = gameCounts.get(name);
+      //   count++;
+      //   gameCounts.put(name, count);
+      // } else {
+      //   int count = 1;
+      //   gameCounts.put(name, count);
+      // }
+
+      // //logic for filling highScores
+      // if(highScores.containsKey(name)) {
+
+      // } else {
+      //   int highest = highScores.get(name);
+        
+      // }
     }
   }
 
@@ -52,8 +80,13 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
   @Override
   public int gameCount(String person) {
     checkPerson(person);
-    int returnInt = gameCounts.get(person);
+
+    int returnInt = allMap.get(person).size();
     return returnInt;
+
+    // int returnInt = gameCounts.get(person);
+    // return returnInt;
+    
   }
 
   /**
@@ -152,7 +185,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
     if(person == null) {
       throw new NullPointerException("Cannot query for null person");
     }
-    if(!gameCounts.containsKey(person)) {
+    if(!allMap.containsKey(person)) {
       throw new NoSuchElementException("Person " + person + " does not exist in the score data");
     }
   }
@@ -163,7 +196,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    * @throws NoSuchElementException if there is no score data
    */
   private void checkScoreData() {
-    if(gameCounts.isEmpty()) {
+    if(allMap.isEmpty()) {
       throw new NoSuchElementException("No score data parsed");
     }
   }
