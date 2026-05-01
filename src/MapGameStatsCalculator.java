@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MapGameStatsCalculator implements GameStatsCalculator {
 
@@ -81,7 +82,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
   public int gameCount(String person) {
     checkPerson(person);
 
-    int returnInt = allMap.get(person).size();
+    int returnInt = allMap.get(person).size(); //the size of the list at the key
     return returnInt;
 
     // int returnInt = gameCounts.get(person);
@@ -98,11 +99,11 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public int highScore(String person) {
-    // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'highScore'");
-
-    // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkPerson(person);
+    checkPerson(person);
+    ArrayList<Integer> list = allMap.get(person);
+    Collections.sort(list); //sort ascending
+    int returnInt = list.get(list.size() - 1); //grab the last value
+    return returnInt;
   }
 
   /**
