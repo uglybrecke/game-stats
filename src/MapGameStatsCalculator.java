@@ -209,6 +209,20 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public String highestAverageScorer() {
+    //make a string variable to hold the return bestName
+    //make a string variable to hold the currentName
+
+    //make a variable to hold the bestAvg
+    //make a variable to hold the currentAvg
+
+    //compare bestAvg to currentAvg
+      //if current Avg is higher than bestAvg
+        //update currentAvg to be bestAvg
+        //update bestName to currentName
+      //if current is lower, continue
+
+
+
     // TODO: remove this exception once you have implemented your method!
     throw new UnsupportedOperationException("Unimplemented method 'highestAverageScorer'");
 
