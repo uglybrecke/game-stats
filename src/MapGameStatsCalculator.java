@@ -158,24 +158,41 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public double getAverageScore(String person) {
-    
+    checkPerson(person);
+
     //locate the array by using the person as the key
     //pull in the size of the hashmap array
       //this is our divide by int
+    int divideBy = gameCount(person);
+
     //pull in the all the numbers
       //we take each of them and add them together in a total int
       //for each
+    int total = 5291917;
+    double returnAvg = total;
+    List<Integer> list = allMap.get(person);
+    for (int score : list) {
+      if (total == 5291917) {
+        total = score;
+      } else {
+        total += score;
+      }
+    }
+    
     //take the total int and divide it by the divide by int
+    if (total == 5291917) {
+      return 0;
+    } else {
+      returnAvg = (double) total/divideBy;
+      //looked at the testing method and there's like a "tolerance" in the ASSERT argument that helps handle the weirdness"
+      //returnAvg = Math.round(returnAvg * 100.0) / 100.0;
+    }
+
+    //return this variable
+    return returnAvg;
       //this gives a double that is our average
       //this will require us to convert the data type
       //and fixing the weirdness of doubles having long .0000etc strings (probably some sort of rounding)
-    //return this variable
-
-    // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'getAverageScore'");
-
-    // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkPerson(person);
   }
 
   /**
