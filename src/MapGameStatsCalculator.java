@@ -144,7 +144,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
       }
     }
     if (winnerScore == 5291917) {
-      return "When everyone's a winner no one is!";
+      return "When everyone's super no one is!";
     }
     return winnerName;
   }
@@ -158,6 +158,19 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public double getAverageScore(String person) {
+    
+    //locate the array by using the person as the key
+    //pull in the size of the hashmap array
+      //this is our divide by int
+    //pull in the all the numbers
+      //we take each of them and add them together in a total int
+      //for each
+    //take the total int and divide it by the divide by int
+      //this gives a double that is our average
+      //this will require us to convert the data type
+      //and fixing the weirdness of doubles having long .0000etc strings (probably some sort of rounding)
+    //return this variable
+
     // TODO: remove this exception once you have implemented your method!
     throw new UnsupportedOperationException("Unimplemented method 'getAverageScore'");
 
