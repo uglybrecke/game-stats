@@ -164,6 +164,9 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
     //pull in the size of the hashmap array
       //this is our divide by int
     int divideBy = gameCount(person);
+    if (divideBy == 0) { //just in case somehow gameCount gives us a 0 in an edge case i can't see
+      return 0;
+    }
 
     //pull in the all the numbers
       //we take each of them and add them together in a total int
