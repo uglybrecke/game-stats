@@ -209,27 +209,60 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public String highestAverageScorer() {
+    checkScoreData();
     //make a string variable to hold the return bestName
+    String bestName = "None";
+
     //make a string variable to hold the currentName
+    String currentName = "None";
 
     //make a variable to hold the bestAvg
+    double bestAvg = 0;
     //make a variable to hold the currentAvg
+    double currentAvg = 0;
 
-    //compare bestAvg to currentAvg
-      //if current Avg is higher than bestAvg
-        //update currentAvg to be bestAvg
-        //update bestName to currentName
-      //if current is lower, continue
+    for (String name : allMap.keySet()) {
+      currentName = name;
+      currentAvg = getAverageScore(name);
 
+      //if the current name is None, set the best and move on 
+      if (bestName.equals("None")) {
+        bestName = currentName;
+        bestAvg = currentAvg;
+        continue;
 
-
-    // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'highestAverageScorer'");
-
-    // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkScoreData();
-  }
-
+      } else {
+        //if current Avg is higher than bestAvg
+        if (currentAvg > bestAvg) {
+          //update currentAvg to be bestAvg
+          bestAvg = currentAvg;
+          //update bestName to currentName
+          bestName = currentName;
+          continue;
+        }
+        //if current is lower, continue
+        if (currentAvg < bestAvg) {
+          continue;
+        }
+        //if current is same as bestAvg
+        if (currentAvg == bestAvg) {
+          //compare the names to eachother
+          if (currentName.compareTo(bestName) < 0) {
+            //update BestName with alphabetically first name
+            bestName = currentName;
+            continue;
+          }
+          else {
+            continue;
+          }
+        }
+        continue;
+      } 
+    }
+    //return name with highest avg
+    return bestName;
+  } 
+        
   /**
    * Returns a list of the scores a person has gotten, sorted in ascending order (lowest to highest).
    * 
