@@ -402,6 +402,119 @@ public class MapGameStatsCalculatorTest {
     assertThrows(NoSuchElementException.class, act);
   }
 
+  @Test
+  public void highestAverageScorerOnlyOnePerson() {
+  // Arrange
+    String scoreData = "Nupur 10\n"
+        + "Nupur 30\n"
+        + "Nupur 25\n"
+        + "Nupur 40\n"
+        + "Nupur 50\n"
+        + "Nupur 20\n"
+        + "Nupur 60\n"
+        + "Nupur 30\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    String actual = calculator.highestAverageScorer();
+
+    // Assert
+    assertEquals("Nupur", actual);
+  }
+
+  @Test
+  public void highestAverageScorerBestScoreHasOnlyNegativeScores() {
+    // Arrange
+    String scoreData = "Nupur -10\n"
+        + "Baya -30\n"
+        + "Xinting -10\n"
+        + "Nupur -40\n"
+        + "Baya -50\n"
+        + "Nupur -20\n"
+        + "Baya -60\n"
+        + "Nupur -40\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    String actual = calculator.highestAverageScorer();
+
+    // Assert
+    assertEquals("Xinting", actual);
+  }
+
+  @Test
+  public void highestAverageScorerTiedForHighestScoreAlphebeticalWins() {
+    // Arrange
+    String scoreData = "Nupur 50\n"
+        + "Baya 40\n"
+        + "Baya 60\n"
+        + "Nupur 50\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    String actual = calculator.highestAverageScorer();
+
+    // Assert
+    assertEquals("Baya", actual);
+  }
+
+  @Test
+  public void highestAverageOneOfTheNamesOnTheListIsNoneAndItsLowerAvg() {
+    // Arrange
+    String scoreData = "None 50\n"
+        + "Baya 60\n"
+        + "Baya 60\n"
+        + "Baya 60\n"
+        + "None 50\n"
+        + "None 50\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    String actual = calculator.highestAverageScorer();
+
+    // Assert
+    assertEquals("Baya", actual);
+  }
+
+  @Test
+  public void highestAverageOneOfTheNamesOnTheListIsNoneAndItsHigherAvg() {
+    // Arrange
+    String scoreData = "None 70\n"
+        + "Baya 60\n"
+        + "Baya 60\n"
+        + "Baya 60\n"
+        + "None 70\n"
+        + "None 70\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    String actual = calculator.highestAverageScorer();
+
+    // Assert
+    assertEquals("None", actual);
+  }
+
+  @Test
+  public void highestAverageNoneCanBeAWinner() {
+    // Arrange
+    String scoreData = "Zaya -70\n"
+        + "Zaya -60\n"
+        + "Zaya -60\n"
+        + "None 60\n"
+        + "Tim 50\n"
+        + "Zaya 60\n"
+        + "Zaya 60\n"
+        + "Reggie 50\n"
+        + "Nupur 50\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    String actual = calculator.highestAverageScorer();
+
+    // Assert
+    assertEquals("None", actual);
+  }
+
   // sortedScores tests
 
   @Test
